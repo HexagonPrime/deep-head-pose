@@ -107,7 +107,7 @@ if __name__ == '__main__':
         # label_yaw = cont_labels[:,0].float()
         # label_pitch = cont_labels[:,1].float()
         # label_roll = cont_labels[:,2].float()
-
+        print(str(i))
         yaw, pitch, roll = model(images)
 
         # Binned predictions
