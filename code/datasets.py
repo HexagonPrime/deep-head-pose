@@ -588,4 +588,4 @@ class CelebA(Dataset):
         X = PIL.Image.open(self.data[index])
         X = self.transform(X)
 
-        return X, 0
+        return X, self.data[index]
