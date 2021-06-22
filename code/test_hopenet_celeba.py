@@ -142,7 +142,7 @@ if __name__ == '__main__':
             #     cv2.putText(cv2_img, error_string, (30, cv2_img.shape[0]- 30), fontFace=1, fontScale=1, color=(0,0,255), thickness=2)
             # utils.plot_pose_cube(cv2_img, yaw_predicted[0], pitch_predicted[0], roll_predicted[0], size=100)
             print(str(yaw_predicted[0]) + ' ' + str(pitch_predicted[0]) + ' ' + str(roll_predicted[0]))
-            utils.draw_axis(cv2_img, yaw_predicted[0], pitch_predicted[0], roll_predicted[0], tdx = 200, tdy= 200, size=100)
+            utils.draw_axis(cv2_img, yaw_predicted[0], pitch_predicted[0], roll_predicted[0], size=100)
             print(os.path.join('output/images', str(i) + '.jpg'))
             cv2.imwrite(os.path.join('output/images', str(i) + '.jpg'), cv2_img)
 
