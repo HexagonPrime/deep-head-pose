@@ -29,7 +29,7 @@ def parse_args():
     parser.add_argument('--batch_size', dest='batch_size', help='Batch size.',
           default=1, type=int)
     parser.add_argument('--save_viz', dest='save_viz', help='Save images with pose cube.',
-          default=True, type=bool)
+          default=False, type=bool)
     parser.add_argument('--dataset', dest='dataset', help='Dataset type.', default='CelebA', type=str)
 
     args = parser.parse_args()
@@ -99,6 +99,7 @@ if __name__ == '__main__':
     # roll_error = .0
 
     # l1loss = torch.nn.L1Loss(size_average=False)
+    data_list = []
 
     for i, (images, names) in enumerate(test_loader):
         images = Variable(images).cuda(gpu)
@@ -125,6 +126,8 @@ if __name__ == '__main__':
         pitch_predicted = torch.sum(pitch_predicted * idx_tensor, 1).cpu() * 3 - 99
         roll_predicted = torch.sum(roll_predicted * idx_tensor, 1).cpu() * 3 - 99
 
+        data_list.append([names[0], yaw_predicted[0].item(), pitch_predicted[0].item(), roll_predicted[0].item()])
+
         # Mean absolute error
         # yaw_error += torch.sum(torch.abs(yaw_predicted - label_yaw))
         # pitch_error += torch.sum(torch.abs(pitch_predicted - label_pitch))
@@ -145,6 +148,8 @@ if __name__ == '__main__':
             utils.draw_axis(cv2_img, yaw_predicted[0], pitch_predicted[0], roll_predicted[0], size=100)
             print(os.path.join('output/images', str(i) + '.jpg'))
             cv2.imwrite(os.path.join('output/images', str(i) + '.jpg'), cv2_img)
+    objects = pd.DataFrame(list_objects)
+    objects.to_csv('CelebA_pos.csv', index=False, header=False)
 
     # print('Test error in degrees of the model on the ' + str(total) +
     # ' test images. Yaw: %.4f, Pitch: %.4f, Roll: %.4f' % (yaw_error / total,
