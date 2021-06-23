@@ -14,6 +14,7 @@ import torchvision
 import torch.nn.functional as F
 
 import datasets, hopenet, utils
+from tqdm import tqdm
 
 def parse_args():
     """Parse input arguments."""
@@ -101,7 +102,7 @@ if __name__ == '__main__':
     # l1loss = torch.nn.L1Loss(size_average=False)
     data_list = []
     print('start')
-    for i, (images, names) in enumerate(test_loader):
+    for i, (images, names) in tqdm(enumerate(test_loader)):
         images = Variable(images).cuda(gpu)
         # total += cont_labels.size(0)
 
