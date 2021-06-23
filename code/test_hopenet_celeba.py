@@ -149,7 +149,7 @@ if __name__ == '__main__':
             utils.draw_axis(cv2_img, yaw_predicted[0], pitch_predicted[0], roll_predicted[0], size=100)
             print(os.path.join('output/images', str(i) + '.jpg'))
             cv2.imwrite(os.path.join('output/images', str(i) + '.jpg'), cv2_img)
-    objects = pd.DataFrame(list_objects)
+    objects = pd.DataFrame(data_list)
     objects.to_csv('CelebA_pos.csv', index=False, header=False)
 
     # print('Test error in degrees of the model on the ' + str(total) +
