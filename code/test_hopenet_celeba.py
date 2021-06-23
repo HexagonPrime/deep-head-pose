@@ -15,6 +15,7 @@ import torch.nn.functional as F
 
 import datasets, hopenet, utils
 from tqdm import tqdm
+import pandas as pd
 
 def parse_args():
     """Parse input arguments."""
