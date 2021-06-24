@@ -110,9 +110,10 @@ if __name__ == '__main__':
         # label_yaw = cont_labels[:,0].float()
         # label_pitch = cont_labels[:,1].float()
         # label_roll = cont_labels[:,2].float()
-        print(str(i))
-        yaw, pitch, roll = model(images)
-        print(str(i) + ' finish')
+        with no_grad():
+            print(str(i))
+            yaw, pitch, roll = model(images)
+            print(str(i) + ' finish')
 
         # Binned predictions
         _, yaw_bpred = torch.max(yaw.data, 1)
@@ -128,7 +129,7 @@ if __name__ == '__main__':
         pitch_predicted = torch.sum(pitch_predicted * idx_tensor, 1).cpu() * 3 - 99
         roll_predicted = torch.sum(roll_predicted * idx_tensor, 1).cpu() * 3 - 99
 
-        data_list.append([names[0], yaw_ori[0], yaw_predicted[0].item(), pitch_ori[0], pitch_predicted[0].item(), roll_predicted[0].item()])
+        data_list.append([names[0], yaw_ori[0].item(), yaw_predicted[0].item(), pitch_ori[0].item(), pitch_predicted[0].item(), roll_predicted[0].item()])
 
         # Mean absolute error
         # yaw_error += torch.sum(torch.abs(yaw_predicted - label_yaw))
