@@ -598,9 +598,9 @@ class CelebA(Dataset):
 
         # self.data = glob.glob('/scratch_net/biwidl306/shecai/img_align_celeba/*.jpg')
         self.data = pd.read_csv('/home/shecai/pi-GAN/pi-gan.csv')
-        self.yaw = self.data.iloc[:, 4].to_list()
-        self.pitch = self.data.iloc[:, 3].to_list()
-        self.data = self.data.iloc[:, 5].to_list()
+        self.yaw = self.data.iloc[:, 3].to_list()
+        self.pitch = self.data.iloc[:, 2].to_list()
+        self.data = self.data.iloc[:, 4].to_list()
         assert len(self.data) > 0, "Can't find data; make sure you specify the path to your dataset"
         self.transform = transforms.Compose(
                     [transforms.Resize(320), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])
