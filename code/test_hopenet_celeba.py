@@ -31,7 +31,7 @@ def parse_args():
     parser.add_argument('--batch_size', dest='batch_size', help='Batch size.',
           default=1, type=int)
     parser.add_argument('--save_viz', dest='save_viz', help='Save images with pose cube.',
-          default=True, type=bool)
+          default=False, type=bool)
     parser.add_argument('--dataset', dest='dataset', help='Dataset type.', default='CelebA', type=str)
 
     args = parser.parse_args()
