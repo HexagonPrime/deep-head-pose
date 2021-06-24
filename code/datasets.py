@@ -603,7 +603,7 @@ class CelebA(Dataset):
         self.data = self.data.iloc[:, 4].to_list()
         assert len(self.data) > 0, "Can't find data; make sure you specify the path to your dataset"
         self.transform = transforms.Compose(
-                    [transforms.Resize(320), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])
+                    [transforms.Resize(320), transforms.CenterCrop(256), transforms.ToTensor(), transforms.Normalize([0.5], [0.5]), transforms.RandomHorizontalFlip(p=0.5), transforms.Resize((256, 256), interpolation=0)])
 
     def __len__(self):
         return len(self.data)
