@@ -590,28 +590,28 @@ class CelebA(Dataset):
 
         return X, self.data[index]
 
-# class CelebA(Dataset):
-#     """CelelebA Dataset"""
+class PiGAN(Dataset):
+    """CelelebA Dataset"""
 
-#     def __init__(self):
-#         super().__init__()
+    def __init__(self):
+        super().__init__()
 
-#         # self.data = glob.glob('/scratch_net/biwidl306/shecai/img_align_celeba/*.jpg')
-#         self.data = pd.read_csv('/home/shecai/pi-GAN/pi-gan.csv', header=None)
-#         self.yaw = self.data.iloc[:, 3].to_list()
-#         self.pitch = self.data.iloc[:, 2].to_list()
-#         self.data = self.data.iloc[:, 4].to_list()
-#         assert len(self.data) > 0, "Can't find data; make sure you specify the path to your dataset"
-#         # self.transform = transforms.Compose(
-#         #             [transforms.Resize(320), transforms.CenterCrop(256), transforms.ToTensor(), transforms.Normalize([0.5], [0.5]), transforms.RandomHorizontalFlip(p=0.5), transforms.Resize((256, 256), interpolation=0)])
-#         self.transform = transforms.Compose(
-#                     [transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])
+        # self.data = glob.glob('/scratch_net/biwidl306/shecai/img_align_celeba/*.jpg')
+        self.data = pd.read_csv('/home/shecai/pi-GAN/pi-gan.csv', header=None)
+        self.yaw = self.data.iloc[:, 3].to_list()
+        self.pitch = self.data.iloc[:, 2].to_list()
+        self.data = self.data.iloc[:, 4].to_list()
+        assert len(self.data) > 0, "Can't find data; make sure you specify the path to your dataset"
+        # self.transform = transforms.Compose(
+        #             [transforms.Resize(320), transforms.CenterCrop(256), transforms.ToTensor(), transforms.Normalize([0.5], [0.5]), transforms.RandomHorizontalFlip(p=0.5), transforms.Resize((256, 256), interpolation=0)])
+        self.transform = transforms.Compose(
+                    [transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])
 
-#     def __len__(self):
-#         return len(self.data)
+    def __len__(self):
+        return len(self.data)
 
-#     def __getitem__(self, index):
-#         X = PIL.Image.open(self.data[index])
-#         X = self.transform(X)
+    def __getitem__(self, index):
+        X = PIL.Image.open(self.data[index])
+        X = self.transform(X)
 
-#         return X, self.data[index], self.pitch[index], self.yaw[index]
+        return X, self.data[index], self.pitch[index], self.yaw[index]
