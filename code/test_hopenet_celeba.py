@@ -149,8 +149,8 @@ if __name__ == '__main__':
             # utils.plot_pose_cube(cv2_img, yaw_predicted[0], pitch_predicted[0], roll_predicted[0], size=100)
             print(str(yaw_predicted[0]) + ' ' + str(pitch_predicted[0]) + ' ' + str(roll_predicted[0]))
             utils.draw_axis(cv2_img, yaw_predicted[0], pitch_predicted[0], roll_predicted[0], size=100)
-            print(os.path.join('output/images', str(i) + '.jpg'))
-            cv2.imwrite(os.path.join('output/images', str(i) + '.jpg'), cv2_img)
+            print(os.path.join('output/images', str(yaw_ori[0].item()) + '_' + str(pitch_ori[0].item()) + '.jpg'))
+            cv2.imwrite(os.path.join('output/images', str(yaw_ori[0].item()) + '_' + str(pitch_ori[0].item()) + '.jpg'), cv2_img)
     objects = pd.DataFrame(data_list)
     objects.to_csv('CelebA_pos.csv', index=False, header=False)
 
