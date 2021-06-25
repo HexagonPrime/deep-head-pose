@@ -103,7 +103,7 @@ if __name__ == '__main__':
     # l1loss = torch.nn.L1Loss(size_average=False)
     data_list = []
     print('start')
-    for i, (images, names, pitch_ori, yaw_ori) in tqdm(enumerate(test_loader)):
+    for i, (images, names) in tqdm(enumerate(test_loader)):
         images = Variable(images).cuda(gpu)
         # total += cont_labels.size(0)
 
@@ -129,7 +129,7 @@ if __name__ == '__main__':
         pitch_predicted = torch.sum(pitch_predicted * idx_tensor, 1).cpu() * 3 - 99
         roll_predicted = torch.sum(roll_predicted * idx_tensor, 1).cpu() * 3 - 99
 
-        data_list.append([names[0], yaw_ori[0].item(), yaw_predicted[0].item(), pitch_ori[0].item(), pitch_predicted[0].item(), roll_predicted[0].item()])
+        data_list.append([names[0], yaw_predicted[0].item(), pitch_predicted[0].item(), roll_predicted[0].item()])
 
         # Mean absolute error
         # yaw_error += torch.sum(torch.abs(yaw_predicted - label_yaw))
