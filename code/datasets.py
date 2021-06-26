@@ -579,7 +579,7 @@ class CelebA(Dataset):
         self.data = glob.glob('/scratch_net/biwidl306/shecai/img_align_celeba/*.jpg')
         assert len(self.data) > 0, "Can't find data; make sure you specify the path to your dataset"
         self.transform = transforms.Compose(
-                    [transforms.Resize(320), transforms.CenterCrop(256), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])
+                    [transforms.Resize(320), transforms.CenterCrop(256), transforms.ToTensor()])
 
     def __len__(self):
         return len(self.data)
@@ -605,7 +605,7 @@ class PiGAN(Dataset):
         # self.transform = transforms.Compose(
         #             [transforms.Resize(320), transforms.CenterCrop(256), transforms.ToTensor(), transforms.Normalize([0.5], [0.5]), transforms.RandomHorizontalFlip(p=0.5), transforms.Resize((256, 256), interpolation=0)])
         self.transform = transforms.Compose(
-                    [transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])
+                    [transforms.ToTensor()])
 
     def __len__(self):
         return len(self.data)
