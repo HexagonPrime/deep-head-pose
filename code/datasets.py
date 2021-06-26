@@ -578,8 +578,11 @@ class CelebA(Dataset):
 
         self.data = glob.glob('/scratch_net/biwidl306/shecai/img_align_celeba/*.jpg')
         assert len(self.data) > 0, "Can't find data; make sure you specify the path to your dataset"
-        self.transform = transforms.Compose(
-                    [transforms.Resize(320), transforms.CenterCrop(256), transforms.ToTensor()])
+        # self.transform = transforms.Compose(
+        #             [transforms.Resize(320), transforms.CenterCrop(256), transforms.ToTensor()])
+        self.transform = transforms.Compose([transforms.resize(224),
+        transforms.CenterCrop(224), transforms.ToTensor(),
+        transforms.Normalize(mean=[0.50612009, 0.42543493, 0.38282761], std=[0.26589054, 0.24521921, 0.24127836])])
 
     def __len__(self):
         return len(self.data)
