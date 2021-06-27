@@ -129,7 +129,14 @@ if __name__ == '__main__':
         pitch_predicted = torch.sum(pitch_predicted * idx_tensor, 1).cpu() * 3 - 99
         roll_predicted = torch.sum(roll_predicted * idx_tensor, 1).cpu() * 3 - 99
 
-        data_list.append([names[0], yaw_ori[0].item(), yaw_predicted[0].item(), pitch_ori[0].item(), pitch_predicted[0].item(), roll_predicted[0].item()])
+        yaw_predicted = -yaw_predicted
+
+        import math
+        yaw_predicted = math.radians(yaw_predicted[0].item())
+        pitch_predicted = math.radians(pitch_predicted[0].item())
+        roll_predicted = math.radians(roll_predicted[0].item())
+
+        data_list.append([names[0], yaw_ori[0].item(), yaw_predicted, pitch_ori[0].item(), pitch_predicted, roll_predicted])
 
         # Mean absolute error
         # yaw_error += torch.sum(torch.abs(yaw_predicted - label_yaw))
@@ -147,13 +154,13 @@ if __name__ == '__main__':
             #     error_string = 'y %.2f, p %.2f, r %.2f' % (torch.sum(torch.abs(yaw_predicted - label_yaw)), torch.sum(torch.abs(pitch_predicted - label_pitch)), torch.sum(torch.abs(roll_predicted - label_roll)))
             #     cv2.putText(cv2_img, error_string, (30, cv2_img.shape[0]- 30), fontFace=1, fontScale=1, color=(0,0,255), thickness=2)
             # utils.plot_pose_cube(cv2_img, yaw_predicted[0], pitch_predicted[0], roll_predicted[0], size=100)
-            print(str(yaw_predicted[0]) + ' ' + str(pitch_predicted[0]) + ' ' + str(roll_predicted[0]))
-            utils.draw_axis(cv2_img, yaw_predicted[0], pitch_predicted[0], roll_predicted[0], size=100)
-            print(os.path.join('output/images', str(yaw_predicted[0].item()) + '_' + str(pitch_predicted[0].item()) + '.jpg'))
+            print(str(yaw_predicted) + ' ' + str(pitch_predicted) + ' ' + str(roll_predicted))
+            utils.draw_axis(cv2_img, yaw_predicted, pitch_predicted, roll_predicted, size=100)
+            print(os.path.join('output/images', str(yaw_predicted) + '_' + str(pitch_predicted) + '.jpg'))
             # cv2.imwrite(os.path.join('output/images', str(yaw_predicted[0].item()) + '_' + str(yaw_ori[0].item()) + '_' + str(pitch_predicted[0].item()) + '_' + str(pitch_ori[0].item()) + '.jpg'), cv2_img)
-            cv2.imwrite(os.path.join('output/images', str(pitch_predicted[0].item()) + '_' + str(pitch_ori[0].item()) + '.jpg'), cv2_img)
+            cv2.imwrite(os.path.join('output/images', str(pitch_predicted) + '_' + str(pitch_ori) + '.jpg'), cv2_img)
     objects = pd.DataFrame(data_list)
-    objects.to_csv('CelebA_pos.csv', index=False, header=False)
+    objects.to_csv('pigan_pos.csv', index=False, header=False)
 
     # print('Test error in degrees of the model on the ' + str(total) +
     # ' test images. Yaw: %.4f, Pitch: %.4f, Roll: %.4f' % (yaw_error / total,
