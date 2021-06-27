@@ -582,7 +582,7 @@ class CelebA(Dataset):
         #             [transforms.Resize(320), transforms.CenterCrop(256), transforms.ToTensor()])
         self.transform = transforms.Compose([transforms.Resize(300),
         transforms.CenterCrop(224), transforms.ToTensor(),
-        transforms.Normalize(mean=[0.50612009, 0.42543493, 0.38282761], std=[0.26589054, 0.24521921, 0.24127836])])
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
 
     def __len__(self):
         return len(self.data)
@@ -608,7 +608,7 @@ class PiGAN(Dataset):
         # self.transform = transforms.Compose(
         #             [transforms.Resize(320), transforms.CenterCrop(256), transforms.ToTensor(), transforms.Normalize([0.5], [0.5]), transforms.RandomHorizontalFlip(p=0.5), transforms.Resize((256, 256), interpolation=0)])
         self.transform = transforms.Compose(
-                    [transforms.ToTensor(), transforms.Normalize(mean=[0.50612009, 0.42543493, 0.38282761], std=[0.26589054, 0.24521921, 0.24127836])])
+                    [transforms.ToTensor(), transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
 
     def __len__(self):
         return len(self.data)
