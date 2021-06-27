@@ -132,8 +132,8 @@ if __name__ == '__main__':
         yaw_predicted = -yaw_predicted
 
         import math
-        yaw_predicted = math.radians(yaw_predicted[0].item())
-        pitch_predicted = math.radians(pitch_predicted[0].item())
+        yaw_predicted = math.radians(yaw_predicted[0].item()) + math.pi*0.5
+        pitch_predicted = math.radians(pitch_predicted[0].item()) + math.pi*0.5
         roll_predicted = math.radians(roll_predicted[0].item())
 
         data_list.append([names[0], yaw_ori[0].item(), yaw_predicted, pitch_ori[0].item(), pitch_predicted, roll_predicted])
